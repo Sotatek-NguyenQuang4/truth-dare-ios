@@ -24,9 +24,9 @@ struct Purchase: Codable {
     let paymentId: String
     let price: String
     
-    init(title: String, paymentId: String, price: String) {
+    init(title: String, body: String, paymentId: String, price: String) {
         self.title = title
-        self.body = ""
+        self.body = body
         self.paymentId = paymentId
         self.price = price
     }

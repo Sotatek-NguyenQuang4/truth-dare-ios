@@ -462,7 +462,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="purchasingButton:" destination="IDx-0K-pAg" eventType="touchUpInside" id="juo-CA-1a0"/>
+                                                    <action selector="purchasingAction:" destination="Mp7-13-9CT" eventType="touchUpInside" id="v0w-ui-f1S"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -508,7 +508,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EB6-9S-mwk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="IDx-0K-pAg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4010.144927536232" y="61.607142857142854"/>
         </scene>

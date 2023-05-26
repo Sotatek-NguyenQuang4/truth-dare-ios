@@ -181,7 +181,7 @@ struct AppConstant {
                       "Draw a picture of a cow blindfolded."]),
         
         Topic(name: "Family",
-              url_icon: "mixed",
+              url_icon: "kids",
               truths: ["Would you prefer to dominate me in bed or do you want me to dominate you in bed?",
                        "What is the most embarrassing item in your room?",
                        "If you could have anyone here in the room to be your slave, who would it be and what would you make them do?",

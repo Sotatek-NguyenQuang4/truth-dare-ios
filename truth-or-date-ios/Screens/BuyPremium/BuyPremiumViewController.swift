@@ -21,6 +21,7 @@ class BuyPremiumViewController: BasicViewController {
     var listPayment: [Purchase] = []
     weak var delegate: PaymentDelegate?
     
+    let scrollView = UIScrollView()
     let containerView = UIView()
     let headerView = UIView()
     let reStorePurchase = StyleButton(title: "RESTORE PURCHASE",
@@ -41,15 +42,22 @@ class BuyPremiumViewController: BasicViewController {
     private func setupView() {
         view.backgroundColor = .black.withAlphaComponent(0.4)
         
-        view.addSubviews(containerView)
+        view.addSubviews(scrollView)
+        scrollView.addSubview(containerView)
         containerView.addSubviews([headerView,
                                    mainStackView])
         headerView.addSubviews([reStorePurchase, closeButton])
         
-        containerView.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+        scrollView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.height.equalTo(400)
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().offset(-16)
+        }
+        containerView.backgroundColor = .red
+        containerView.snp.makeConstraints { make in
+            make.edges.width.equalToSuperview()
+            make.height.greaterThanOrEqualToSuperview().priority(.required)
         }
         headerView.snp.makeConstraints { make in
             make.height.equalTo(70)
@@ -68,13 +76,13 @@ class BuyPremiumViewController: BasicViewController {
             make.top.equalTo(headerView.snp.bottom)
             make.left.right.bottom.equalToSuperview()
         }
-        
+
         containerView.layer.cornerRadius = 12
         containerView.backgroundColor = .white
-                
+
         closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         reStorePurchase.addTarget(self, action: #selector(reStorePurchaseAction), for: .touchUpInside)
-        
+
         let url = "https://raw.githubusercontent.com/Sotatek-NguyenQuang4/truth-dare-ios/main/truth-or-date-ios/Payments.geojson"
         BaseAPI.share.fetchData(urlString: url,
                                 responseType: [Purchase].self) { result in
@@ -85,8 +93,14 @@ class BuyPremiumViewController: BasicViewController {
             case .failure(let error):
                 print(error.message)
                 self.listPayment = [
-                    Purchase(title: "DIRT +", paymentId: "com.thanh.phantruth.or.dare.dirt", price: "0.99$"),
-                    Purchase(title: "ALL CONTENT", paymentId: "com.thanh.phantruth.or.dare.all.content", price: "3.99$"),
+                    Purchase(title: "DIRT +",
+                             body: "Turn up the heat and bring the night to a whole new leve. Contains 500+ cards.",
+                             paymentId: "com.thanh.phantruth.or.dare.dirt",
+                             price: "0.99$"),
+                    Purchase(title: "ALL CONTENT",
+                             body: "Buy both Dirty+ and Dirty Extrene abd save 900000.00 đ. Most value",
+                             paymentId: "com.thanh.phantruth.or.dare.all.content",
+                             price: "3.99$"),
                 ]
                 self.setupStackView()
             }
@@ -99,8 +113,9 @@ class BuyPremiumViewController: BasicViewController {
         
 //        let Purchase = ids.map {  }
         
-        listPayment.forEach { element in
-            let itemView = BuyPremiumItemView(model: element)
+        listPayment.enumerated().forEach { index, element in
+            let itemView = BuyPremiumItemView(model: element,
+                                              background: index % 2 == 0 ? .black : .init(hexString: "D05C4D"))
             itemView.delegate = self
             mainStackView.addArrangedSubview(itemView)
         }
