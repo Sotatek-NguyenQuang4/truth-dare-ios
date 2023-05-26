@@ -40,7 +40,7 @@ class BaseAPI {
             let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: [])
             request.httpBody = jsonData
         }
-        
+        URLCache.shared.removeAllCachedResponses()
         let dataTask = URLSession.shared.dataTask(with: request as URLRequest,
                                                   completionHandler: { data, response, error in
             

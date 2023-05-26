@@ -21,6 +21,7 @@ class BuyPremiumViewController: BasicViewController {
     var listPayment: [Purchase] = []
     weak var delegate: PaymentDelegate?
     
+    let mainView = UIView()
     let scrollView = UIScrollView()
     let containerView = UIView()
     let headerView = UIView()
@@ -42,22 +43,18 @@ class BuyPremiumViewController: BasicViewController {
     private func setupView() {
         view.backgroundColor = .black.withAlphaComponent(0.4)
         
-        view.addSubviews(scrollView)
-        scrollView.addSubview(containerView)
-        containerView.addSubviews([headerView,
-                                   mainStackView])
+        view.addSubviews(mainView)
+//        scrollView.addSubview(containerView)
+        mainView.addSubviews([headerView,
+                              scrollView])
+        scrollView.addSubview(mainStackView)
         headerView.addSubviews([reStorePurchase, closeButton])
         
-        scrollView.snp.makeConstraints { make in
+        mainView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.height.equalTo(400)
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().offset(-16)
-        }
-        containerView.backgroundColor = .red
-        containerView.snp.makeConstraints { make in
-            make.edges.width.equalToSuperview()
-            make.height.greaterThanOrEqualToSuperview().priority(.required)
         }
         headerView.snp.makeConstraints { make in
             make.height.equalTo(70)
@@ -72,13 +69,17 @@ class BuyPremiumViewController: BasicViewController {
             make.size.equalTo(50)
             make.right.centerY.equalToSuperview()
         }
-        mainStackView.snp.makeConstraints { make in
+        scrollView.snp.makeConstraints { make in
             make.top.equalTo(headerView.snp.bottom)
             make.left.right.bottom.equalToSuperview()
         }
+        mainStackView.snp.makeConstraints { make in
+            make.edges.width.equalToSuperview()
+            make.height.greaterThanOrEqualToSuperview().priority(.required)
+        }
 
-        containerView.layer.cornerRadius = 12
-        containerView.backgroundColor = .white
+        mainView.layer.cornerRadius = 12
+        mainView.backgroundColor = .white
 
         closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         reStorePurchase.addTarget(self, action: #selector(reStorePurchaseAction), for: .touchUpInside)
@@ -88,6 +89,7 @@ class BuyPremiumViewController: BasicViewController {
                                 responseType: [Purchase].self) { result in
             switch result {
             case .success(let success):
+                print(success)
                 self.listPayment = success
                 self.setupStackView()
             case .failure(let error):
