@@ -28,11 +28,12 @@ class BuyPremiumItemView: UIView {
         self.model = model
         titleLabel.text = model.title
         contentLabel.text = model.body
-        iconView.image = model.icon
-        containerView.backgroundColor = model.background
+//        iconView.image = model.icon
+//        containerView.backgroundColor = model.background
         priceButton.setTitle(model.price, for: .normal)
-        priceButton.setBackgroundColor(model == .dirty ? .black : .init(hexString: "D05C4D"),
-                                       forState: .normal)
+//        priceButton.setBackgroundColor(model == .dirty ? .black : .init(hexString: "D05C4D"),
+//                                       forState: .normal)
+        priceButton.setBackgroundColor(.init(hexString: "D05C4D"), forState: .normal)
         super.init(frame: .zero)
         setupView()
     }

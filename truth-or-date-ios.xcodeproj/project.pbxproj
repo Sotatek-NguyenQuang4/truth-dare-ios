@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3D38DF8C2A2077F2005F1BAC /* StoreKitTestCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 3D38DF8B2A2077F2005F1BAC /* StoreKitTestCertificate.cer */; };
 		3D38DF8E2A20A9D5005F1BAC /* Payments.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3D38DF8D2A20A9BF005F1BAC /* Payments.geojson */; };
+		3D38DF932A20AB59005F1BAC /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D38DF912A20AB59005F1BAC /* BaseAPI.swift */; };
+		3D38DF942A20AB59005F1BAC /* ConfigurationBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D38DF922A20AB59005F1BAC /* ConfigurationBase.swift */; };
 		3DB986942A1FB55800A12051 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB986932A1FB55800A12051 /* StoreKit.framework */; };
 		3DB986962A1FC73100A12051 /* store.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 3DB986922A1FB3A800A12051 /* store.storekit */; };
 		3E5F8EACCCCBF5220FB501C9 /* Pods_truth_or_date_ios_truth_or_date_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD233EFCFAA14876175BD10 /* Pods_truth_or_date_ios_truth_or_date_iosUITests.framework */; };
@@ -86,6 +88,8 @@
 /* Begin PBXFileReference section */
 		3D38DF8B2A2077F2005F1BAC /* StoreKitTestCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = StoreKitTestCertificate.cer; sourceTree = "<group>"; };
 		3D38DF8D2A20A9BF005F1BAC /* Payments.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Payments.geojson; sourceTree = "<group>"; };
+		3D38DF912A20AB59005F1BAC /* BaseAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
+		3D38DF922A20AB59005F1BAC /* ConfigurationBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationBase.swift; sourceTree = "<group>"; };
 		3DB986922A1FB3A800A12051 /* store.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = store.storekit; sourceTree = "<group>"; };
 		3DB986932A1FB55800A12051 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		3DB986952A1FC42000A12051 /* truth-or-date-iosDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "truth-or-date-iosDebug.entitlements"; sourceTree = "<group>"; };
@@ -186,6 +190,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D38DF8F2A20AB4C005F1BAC /* ApiService */ = {
+			isa = PBXGroup;
+			children = (
+				3D38DF912A20AB59005F1BAC /* BaseAPI.swift */,
+				3D38DF922A20AB59005F1BAC /* ConfigurationBase.swift */,
+			);
+			name = ApiService;
+			sourceTree = "<group>";
+		};
+		3D38DF902A20AB53005F1BAC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		90BB80DD1BFE6633AA6FAFB4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,6 +253,8 @@
 		D6544A4328A6C19C0050C74B /* CoreServices */ = {
 			isa = PBXGroup;
 			children = (
+				3D38DF902A20AB53005F1BAC /* Models */,
+				3D38DF8F2A20AB4C005F1BAC /* ApiService */,
 			);
 			name = CoreServices;
 			sourceTree = "<group>";
@@ -727,6 +749,7 @@
 				D6D3DEBD28A7E91E00B320D2 /* BuyPremiumItemView.swift in Sources */,
 				D6D3DEB028A796A500B320D2 /* InfoCardView.swift in Sources */,
 				D6544A2D28A69E880050C74B /* StyleButton.swift in Sources */,
+				3D38DF932A20AB59005F1BAC /* BaseAPI.swift in Sources */,
 				D6D3DE9E28A75E0E00B320D2 /* DirtyViewController.swift in Sources */,
 				D6544A4228A6BCE00050C74B /* CategoryViewController.swift in Sources */,
 				D6544A3B28A6A0BF0050C74B /* HomeViewModel.swift in Sources */,
@@ -754,6 +777,7 @@
 				D6D3DEBA28A7E83900B320D2 /* BuyPremiumViewModel.swift in Sources */,
 				D6544A3528A69F060050C74B /* UIButton.swift in Sources */,
 				D65AD72728A49BCB005692C9 /* TableViewExtension.swift in Sources */,
+				3D38DF942A20AB59005F1BAC /* ConfigurationBase.swift in Sources */,
 				D6D3DEB528A7D28C00B320D2 /* BasicViewController.swift in Sources */,
 				D6544A3928A69FBE0050C74B /* UIViewController.swift in Sources */,
 			);

@@ -18,6 +18,7 @@ protocol PaymentDelegate: AnyObject {
 
 class BuyPremiumViewController: BasicViewController {
     var id: String = ""
+    var listPayment: [Purchase] = []
     weak var delegate: PaymentDelegate?
     
     let containerView = UIView()
@@ -70,57 +71,39 @@ class BuyPremiumViewController: BasicViewController {
         
         containerView.layer.cornerRadius = 12
         containerView.backgroundColor = .white
-        
-        setupStackView()
                 
         closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         reStorePurchase.addTarget(self, action: #selector(reStorePurchaseAction), for: .touchUpInside)
+        
+        let url = "https://raw.githubusercontent.com/Sotatek-NguyenQuang4/truth-dare-ios/main/truth-or-date-ios/Payments.geojson"
+        BaseAPI.share.fetchData(urlString: url,
+                                responseType: [Purchase].self) { result in
+            switch result {
+            case .success(let success):
+                self.listPayment = success
+                self.setupStackView()
+            case .failure(let error):
+                print(error.message)
+                self.listPayment = [
+                    Purchase(title: "DIRT +", paymentId: "com.thanh.phantruth.or.dare.dirt", price: "0.99$"),
+                    Purchase(title: "ALL CONTENT", paymentId: "com.thanh.phantruth.or.dare.all.content", price: "3.99$"),
+                ]
+                self.setupStackView()
+            }
+        }
     }
     
     func setupStackView() {
         mainStackView.axis = .vertical
         mainStackView.removeFullyAllArrangedSubviews()
         
-        Purchase.allCases.forEach { element in
+//        let Purchase = ids.map {  }
+        
+        listPayment.forEach { element in
             let itemView = BuyPremiumItemView(model: element)
             itemView.delegate = self
             mainStackView.addArrangedSubview(itemView)
         }
-        
-//        SwiftyStoreKit.retrieveProductsInfo(["ulabeginsell14.99"]) { result in
-//            if let product = result.retrievedProducts.first {
-//                let priceString = product.localizedPrice!
-//                print("Product: \(product.localizedDescription), price: \(priceString)")
-//            }
-//            else if let invalidProductId = result.invalidProductIDs.first {
-//                print("Invalid product identifier: \(invalidProductId)")
-//            }
-//            else {
-//                print("Error: \(result.error)")
-//            }
-//        }
-        
-        let appleValidator = AppleReceiptValidator(service: .production, sharedSecret: "b2e87b2830fa4a39a433b22e3bb48b24")
-        SwiftyStoreKit.verifyReceipt(using: appleValidator) { result in
-            switch result {
-            case .success(let receipt):
-                let productId = "com.thanh.phantruth.or.dare.dirty"
-                // Verify the purchase of Consumable or NonConsumable
-                let purchaseResult = SwiftyStoreKit.verifyPurchase(
-                    productId: productId,
-                    inReceipt: receipt)
-                    
-                switch purchaseResult {
-                case .purchased(let receiptItem):
-                    print("\(productId) is purchased: \(receiptItem)")
-                case .notPurchased:
-                    print("The user has never purchased \(productId)")
-                }
-            case .error(let error):
-                print("Receipt verification failed: \(error)")
-            }
-        }
-        
     }
     
     @objc func closeAction() {
