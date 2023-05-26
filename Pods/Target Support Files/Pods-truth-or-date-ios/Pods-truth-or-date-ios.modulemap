@@ -1,0 +1,6 @@
+framework module Pods_truth_or_date_ios {
+  umbrella header "Pods-truth-or-date-ios-umbrella.h"
+
+  export *
+  module * { export * }
+}

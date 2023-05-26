@@ -1,0 +1,48 @@
+{
+  "identifier" : "6C131DF8",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "39CFBAE0",
+      "localizations" : [
+        {
+          "description" : "Turn up the heat and bring the night to a who",
+          "displayName" : "DIRT +",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.thanh.phantruth.or.dare.dirt",
+      "referenceName" : "DIRT +",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "3.99",
+      "familyShareable" : false,
+      "internalID" : "9D4333AA",
+      "localizations" : [
+        {
+          "description" : "Buy both Dirty+ and Dirty Extrene abd save 90",
+          "displayName" : "ALL CONTENT",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.thanh.phantruth.or.dare.all.content",
+      "referenceName" : "All Content",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}

@@ -1,0 +1,32 @@
+/* 
+  Localizable.strings
+  truth-or-date-ios
+
+  Created by Nguyen Quang on 15/08/2022.
+  
+*/
+// MARK: - API ERROR
+"Api-title" = "Truth or Date";
+"Api-mess" = "There was an error connecting to the server";
+"Api-retry" = "Retry";
+// MARK: - HOME
+"Home-Who-Is-Playing" = "Who is playing?";
+"Home-Add-player" = "+ ADD PLAYER";
+"Home-player" = "Play";
+"Home-player-default" = "Người chơi";
+"Home-min-player" = "Minimum 2 players";
+"Home-max-player" = "Up to %@ players can be added";
+// MARK: - Category
+"Category-Title" = "Category";
+"Spin-Title" = "Spin";
+// MARK: - Play
+"Play-Choose-One" = "CHOOSE ONE";
+"Play-Truth" = "Truth";
+"Play-Dare" = "Dare";
+"Click-To-Continue" = "Click to continue";
+// MARK: - Setting
+"Setting-title" = "Setting";
+"Setting-Policy" = "PRIVACY POLICY";
+"Setting-TERMS" = "TERMS OF USE";
+"Setting-Buy-Premium" = "BUY PREMIUM";
+"Setting-Add-Player" = "ADD PLAYER";

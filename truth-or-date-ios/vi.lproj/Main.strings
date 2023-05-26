@@ -1,0 +1,33 @@
+
+/* Class = "UIButton"; normalTitle = "Play"; ObjectID = "2YT-hp-bKs"; */
+"2YT-hp-bKs.normalTitle" = "Play";
+
+/* Class = "UIButton"; normalTitle = "PRIVACY POLICY"; ObjectID = "JJL-AH-o7s"; */
+"JJL-AH-o7s.normalTitle" = "PRIVACY POLICY";
+
+/* Class = "UIButton"; normalTitle = "TERMS OF USE"; ObjectID = "My5-3C-ola"; */
+"My5-3C-ola.normalTitle" = "TERMS OF USE";
+
+/* Class = "UIButton"; normalTitle = "+ ADD PLAYER"; ObjectID = "bu3-EX-YWm"; */
+"bu3-EX-YWm.normalTitle" = "+ ADD PLAYER";
+
+/* Class = "UIButton"; normalTitle = "Play"; ObjectID = "dAR-w3-xy6"; */
+"dAR-w3-xy6.normalTitle" = "Play";
+
+/* Class = "UIButton"; normalTitle = "BUY PREMIUM"; ObjectID = "mpl-eJ-gWn"; */
+"mpl-eJ-gWn.normalTitle" = "BUY PREMIUM";
+
+/* Class = "UIButton"; normalTitle = "ADD PLAYER"; ObjectID = "rN5-Wh-hVz"; */
+"rN5-Wh-hVz.normalTitle" = "ADD PLAYER";
+
+/* Class = "UIButton"; normalTitle = "Category"; ObjectID = "u9R-jB-XQ3"; */
+"u9R-jB-XQ3.normalTitle" = "Category";
+
+/* Class = "UILabel"; text = "Setting"; ObjectID = "uH4-M6-30a"; */
+"uH4-M6-30a.text" = "Setting";
+
+/* Class = "UILabel"; text = "Who is playing?"; ObjectID = "wxl-q5-K2w"; */
+"wxl-q5-K2w.text" = "Who is playing?";
+
+/* Class = "UIButton"; normalTitle = "Spin"; ObjectID = "yB2-FF-HAO"; */
+"yB2-FF-HAO.normalTitle" = "Spin";

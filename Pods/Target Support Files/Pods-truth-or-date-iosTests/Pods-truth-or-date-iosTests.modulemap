@@ -1,0 +1,6 @@
+framework module Pods_truth_or_date_iosTests {
+  umbrella header "Pods-truth-or-date-iosTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
