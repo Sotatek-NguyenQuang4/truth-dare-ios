@@ -14,6 +14,7 @@ private let allTag = 1237
 
 protocol PaymentDelegate: AnyObject {
     func reloadApp()
+    func openAllContent()
 }
 
 class BuyPremiumViewController: BasicViewController {
@@ -44,7 +45,7 @@ class BuyPremiumViewController: BasicViewController {
         view.backgroundColor = .black.withAlphaComponent(0.4)
         
         view.addSubviews(mainView)
-//        scrollView.addSubview(containerView)
+        //        scrollView.addSubview(containerView)
         mainView.addSubviews([headerView,
                               scrollView])
         scrollView.addSubview(mainStackView)
@@ -77,20 +78,29 @@ class BuyPremiumViewController: BasicViewController {
             make.edges.width.equalToSuperview()
             make.height.greaterThanOrEqualToSuperview().priority(.required)
         }
-
+        
         mainView.layer.cornerRadius = 12
         mainView.backgroundColor = .white
-
+        
         closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
         reStorePurchase.addTarget(self, action: #selector(reStorePurchaseAction), for: .touchUpInside)
-
+        
+        if AppConstant.listPayment.count > 0 {
+            self.listPayment = AppConstant.listPayment
+            self.setupStackView()
+        } else {
+            self.callApi()
+        }
+    }
+    
+    func callApi() {
         let url = "https://raw.githubusercontent.com/Sotatek-NguyenQuang4/truth-dare-ios/main/truth-or-date-ios/Payments.geojson"
         BaseAPI.share.fetchData(urlString: url,
                                 responseType: [Purchase].self) { result in
             switch result {
             case .success(let success):
                 print(success)
-                self.listPayment = success
+                self.listPayment = success.filter { $0.paymentId != "com.thanh.phantruth.or.dare" }
                 self.setupStackView()
             case .failure(let error):
                 print(error.message)
@@ -113,7 +123,7 @@ class BuyPremiumViewController: BasicViewController {
         mainStackView.axis = .vertical
         mainStackView.removeFullyAllArrangedSubviews()
         
-//        let Purchase = ids.map {  }
+        //        let Purchase = ids.map {  }
         
         listPayment.enumerated().forEach { index, element in
             let itemView = BuyPremiumItemView(model: element,
@@ -162,7 +172,7 @@ class BuyPremiumViewController: BasicViewController {
         SwiftyStoreKit.purchaseProduct(paymentId, quantity: 1, atomically: true) { result in
             switch result {
             case .success:
-                self.fetchReceipt()
+                self.fetchReceipt(paymentId: paymentId)
             case .error(let error):
                 switch error.code {
                 case .unknown: print("Unknown error. Please contact support")
@@ -181,13 +191,13 @@ class BuyPremiumViewController: BasicViewController {
     }
     
     /// Kiểm tra lấy hoá đơn thanh toán thành công
-    func fetchReceipt() {
+    func fetchReceipt(paymentId: String) {
         SwiftyStoreKit.fetchReceipt(forceRefresh: false) { result in
             switch result {
             case .success(let receiptData):
                 let encryptedReceipt = receiptData.base64EncodedString(options: [])
                 print(encryptedReceipt)
-                self.reloadApp()
+                self.reloadApp(paymentId: paymentId)
                 self.closeAction()
             case .error(let error):
                 print(error)
@@ -195,16 +205,24 @@ class BuyPremiumViewController: BasicViewController {
         }
     }
     
-    private func reloadApp() {
+    private func reloadApp(paymentId: String) {
         AppConstant.isInapp = InAppState.active.rawValue
-        AppConstant.listTopicActive.append(id)
-        delegate?.reloadApp()
+        if paymentId == "com.thanh.phantruth.or.dare.all.content" {
+            delegate?.openAllContent()
+        } else {
+            var current = AppConstant.listTopicActive.arrayFromString() ?? []
+            current.append(id)
+            AppConstant.listTopicActive = current.stringFromArray() ?? ""
+            delegate?.reloadApp()
+        }
+        
     }
     
 }
 
 extension BuyPremiumViewController: BuyPremiumDelegate {
     func payment(model: Purchase) {
+        print(model.paymentId)
         self.paymentApple(paymentId: model.paymentId)
     }
 }

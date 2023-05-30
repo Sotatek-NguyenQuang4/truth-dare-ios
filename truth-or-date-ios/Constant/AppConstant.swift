@@ -15,7 +15,7 @@ struct AppConstant {
         let height = width * 2346 / 1459
         return CGSize(width: width, height: height - 25)
     }
-
+    
     static let apiErrorTitle: String = "Api-title".localizedString()
     static let apiErrorMess: String = "Api-mess".localizedString()
     static let apiRetry: String = "Api-retry".localizedString()
@@ -35,9 +35,21 @@ struct AppConstant {
         }
     }
     
-    static var listTopicActive: [String] {
-        get { UserDefaults.standard.object([String].self, with: "listTopicActive") ?? [] }
-        set { UserDefaults.standard.set(object: newValue, forKey: "listTopicActive") }
+    static var listTopicActive: String {
+        //        get { UserDefaults.standard.object([String].self, with: "listTopicActive") ?? [] }
+        //        set { UserDefaults.standard.set(object: newValue, forKey: "listTopicActive") }
+        get {
+            return KeychainService.shared.loadString(key: "listTopicActive") ?? ""
+        }
+        
+        set {
+            _ = KeychainService.shared.saveString(key: "listTopicActive", string: newValue)
+        }
+    }
+    
+    static var listPayment: [Purchase] {
+        get { UserDefaults.standard.object([Purchase].self, with: "listPayment") ?? [] }
+        set { UserDefaults.standard.set(object: newValue, forKey: "listPayment") }
     }
     
     static var accessToken: String {
@@ -71,7 +83,51 @@ struct AppConstant {
     }
     
     static let categories: [Topic] = [
-        Topic(name: "Classic",
+        Topic(name: "Family",
+              url_icon: "kids",
+              truths: ["Would you prefer to dominate me in bed or do you want me to dominate you in bed?",
+                       "What is the most embarrassing item in your room?",
+                       "If you could have anyone here in the room to be your slave, who would it be and what would you make them do?",
+                       "Was there any teacher you thought was hot? Which one? Why?",
+                       "Do you like to exercise?",
+                       "If you could marry one teacher in the school, who would you pick and why?",
+                       "How far would you go with someone that you just met?",
+                       "Do you keep a journal?","What's the dirtiest sext you've ever sent?",
+                       "Who in this room you'd like to have sex with?"],
+              dares: ["Crabwalk across the room.",
+                      "Rate 3 boys and girls you find hot, and want to make out with.",
+                      "Be blindfolded for the next 3 rounds.",
+                      "Talk to your hand like you re making a game plan to sleep with someone else who is in the room.",
+                      "Hold two ice cubes with your hands against your head. Don't let go until they're melted.",
+                      "Massage the person on your right.",
+                      "Go outside and howl at the moon.",
+                      "Massage your partner's feet.",
+                      "Make out with someone of the opposite gender for 2 minutes.",
+                      "Draw a picture of a cow blindfolded."]),
+        
+        Topic(name: "Love",
+              url_icon: "mixed",
+              truths: ["Would you prefer to dominate me in bed or do you want me to dominate you in bed?",
+                       "What is the most embarrassing item in your room?",
+                       "If you could have anyone here in the room to be your slave, who would it be and what would you make them do?",
+                       "Was there any teacher you thought was hot? Which one? Why?",
+                       "Do you like to exercise?",
+                       "If you could marry one teacher in the school, who would you pick and why?",
+                       "How far would you go with someone that you just met?",
+                       "Do you keep a journal?","What's the dirtiest sext you've ever sent?",
+                       "Who in this room you'd like to have sex with?"],
+              dares: ["Crabwalk across the room.",
+                      "Rate 3 boys and girls you find hot, and want to make out with.",
+                      "Be blindfolded for the next 3 rounds.",
+                      "Talk to your hand like you re making a game plan to sleep with someone else who is in the room.",
+                      "Hold two ice cubes with your hands against your head. Don't let go until they're melted.",
+                      "Massage the person on your right.",
+                      "Go outside and howl at the moon.",
+                      "Massage your partner's feet.",
+                      "Make out with someone of the opposite gender for 2 minutes.",
+                      "Draw a picture of a cow blindfolded."]),
+        
+        Topic(name: "School",
               url_icon: "classic",
               truths: ["Have you ever taken money from your roommate?",
                        "Say something about squirrels.",
@@ -135,7 +191,7 @@ struct AppConstant {
                       "Pick who licks a full circle around your face.",
                       "Make a fish face."]),
         
-        Topic(name: "Hot",
+        Topic(name: "Trending",
               url_icon: "hot",
               truths: ["Do you prefer making a first step in relationship or do you prefer your SO to do it?",
                        "What was your best sexual experience?",
@@ -179,50 +235,6 @@ struct AppConstant {
                       "Massage your partner's feet.",
                       "Make out with someone of the opposite gender for 2 minutes.",
                       "Draw a picture of a cow blindfolded."]),
-        
-        Topic(name: "Family",
-              url_icon: "kids",
-              truths: ["Would you prefer to dominate me in bed or do you want me to dominate you in bed?",
-                       "What is the most embarrassing item in your room?",
-                       "If you could have anyone here in the room to be your slave, who would it be and what would you make them do?",
-                       "Was there any teacher you thought was hot? Which one? Why?",
-                       "Do you like to exercise?",
-                       "If you could marry one teacher in the school, who would you pick and why?",
-                       "How far would you go with someone that you just met?",
-                       "Do you keep a journal?","What's the dirtiest sext you've ever sent?",
-                       "Who in this room you'd like to have sex with?"],
-              dares: ["Crabwalk across the room.",
-                      "Rate 3 boys and girls you find hot, and want to make out with.",
-                      "Be blindfolded for the next 3 rounds.",
-                      "Talk to your hand like you re making a game plan to sleep with someone else who is in the room.",
-                      "Hold two ice cubes with your hands against your head. Don't let go until they're melted.",
-                      "Massage the person on your right.",
-                      "Go outside and howl at the moon.",
-                      "Massage your partner's feet.",
-                      "Make out with someone of the opposite gender for 2 minutes.",
-                      "Draw a picture of a cow blindfolded."]),
-        
-        Topic(name: "Love",
-              url_icon: "mixed",
-              truths: ["Would you prefer to dominate me in bed or do you want me to dominate you in bed?",
-                       "What is the most embarrassing item in your room?",
-                       "If you could have anyone here in the room to be your slave, who would it be and what would you make them do?",
-                       "Was there any teacher you thought was hot? Which one? Why?",
-                       "Do you like to exercise?",
-                       "If you could marry one teacher in the school, who would you pick and why?",
-                       "How far would you go with someone that you just met?",
-                       "Do you keep a journal?","What's the dirtiest sext you've ever sent?",
-                       "Who in this room you'd like to have sex with?"],
-              dares: ["Crabwalk across the room.",
-                      "Rate 3 boys and girls you find hot, and want to make out with.",
-                      "Be blindfolded for the next 3 rounds.",
-                      "Talk to your hand like you re making a game plan to sleep with someone else who is in the room.",
-                      "Hold two ice cubes with your hands against your head. Don't let go until they're melted.",
-                      "Massage the person on your right.",
-                      "Go outside and howl at the moon.",
-                      "Massage your partner's feet.",
-                      "Make out with someone of the opposite gender for 2 minutes.",
-                      "Draw a picture of a cow blindfolded."])
     ]
 }
 
@@ -256,9 +268,20 @@ extension UserDefaults {
         guard let data = self.value(forKey: key) as? Data else { return nil }
         return try? decoder.decode(type.self, from: data)
     }
-
+    
     func set<T: Codable>(object: T, forKey key: String, usingEncoder encoder: JSONEncoder = JSONEncoder()) {
         let data = try? encoder.encode(object)
         self.set(data, forKey: key)
     }
+}
+
+func stringFromArray(_ array: [String]) -> String? {
+    return (try? JSONSerialization.data(withJSONObject: array, options: []))?.base64EncodedString()
+}
+
+func arrayFromString(_ string: String) -> [String]? {
+    guard let data = Data(base64Encoded: string) else {
+        return nil
+    }
+    return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String]
 }

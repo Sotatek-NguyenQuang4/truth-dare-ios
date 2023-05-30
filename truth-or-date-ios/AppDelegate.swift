@@ -15,10 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         startInAppPurchase()
-        if AppConstant.listTopicActive.count == 0 {
-            AppConstant.listTopicActive = ["Classic", "Teens"]
-        }
         return true
+    }
+    
+    func arrayFromString(_ string: String) -> [String]? {
+        guard let data = Data(base64Encoded: string) else {
+            return nil
+        }
+        return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String]
+    }
+    
+    func stringFromArray(_ array: [String]) -> String? {
+        return (try? JSONSerialization.data(withJSONObject: array, options: []))?.base64EncodedString()
     }
     
     // MARK: UISceneSession Lifecycle

@@ -53,7 +53,9 @@ class CategoryViewController: BasicViewController {
         self.showCustomeIndicator()
         self.categories = AppConstant.categories
         self.categories.forEach {
-            $0.isLock = AppConstant.listTopicActive.contains($0.name)
+            let listTopicActive = AppConstant.listTopicActive.arrayFromString() ?? []
+            print("nnq: \(listTopicActive)")
+            $0.isLock = listTopicActive.contains($0.name)
         }
         myTableView.reloadData()
         self.hideCustomeIndicator()
@@ -111,7 +113,29 @@ extension CategoryViewController: SettingDelegate {
 
 
 extension CategoryViewController: PaymentDelegate {
+    func openAllContent() {
+        let listIds = self.categories.map { $0.name }
+        AppConstant.listTopicActive = ""
+        AppConstant.listTopicActive = listIds.stringFromArray() ?? ""
+        getAllCategory()
+    }
+    
     func reloadApp() {
         getAllCategory()
+    }
+}
+
+extension String {
+    func arrayFromString() -> [String]? {
+        guard let data = Data(base64Encoded: self) else {
+            return nil
+        }
+        return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String]
+    }
+}
+
+extension Array {
+    func stringFromArray() -> String? {
+        return (try? JSONSerialization.data(withJSONObject: self, options: []))?.base64EncodedString()
     }
 }

@@ -30,6 +30,35 @@ class HomeViewController: BasicViewController {
         localizable()
         hideKeyboardWhenTappedAround()
         self.navigationController?.isNavigationBarHidden = true
+        
+        let url = "https://raw.githubusercontent.com/Sotatek-NguyenQuang4/truth-dare-ios/main/truth-or-date-ios/Payments.geojson"
+        BaseAPI.share.fetchData(urlString: url,
+                                responseType: [Purchase].self) { result in
+            switch result {
+            case .success(let success):
+                print(success)
+                AppConstant.listPayment = success.filter { $0.paymentId != "com.thanh.phantruth.or.dare" }
+                
+                guard let _ = success.first(where: { $0.paymentId == "com.thanh.phantruth.or.dare" }) else {
+                    return
+                }
+                AppConstant.listTopicActive = ["Family", "Love"].stringFromArray() ?? ""
+                
+            case .failure(let error):
+                print(error.message)
+                let listPayment = [
+                    Purchase(title: "DIRT +",
+                             body: "Turn up the heat and bring the night to a whole new leve. Contains 500+ cards.",
+                             paymentId: "com.thanh.phantruth.or.dare.dirt",
+                             price: "0.99$"),
+                    Purchase(title: "ALL CONTENT",
+                             body: "Buy both Dirty+ and Dirty Extrene abd save 900000.00 đ. Most value",
+                             paymentId: "com.thanh.phantruth.or.dare.all.content",
+                             price: "3.99$"),
+                ]
+                AppConstant.listPayment = listPayment
+            }
+        }
     }
     
     func localizable() {

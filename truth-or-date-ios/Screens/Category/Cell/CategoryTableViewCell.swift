@@ -33,6 +33,7 @@ class CategoryTableViewCell: UITableViewCell {
         nameLabel.text = model.name
         lockButton.isHidden = model.isLock
         categoryImageView.image = UIImage(named: model.url_icon)
+        categoryImageView.isHidden = true
     }
     
 }
